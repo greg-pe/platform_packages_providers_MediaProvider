@@ -269,6 +269,7 @@ public class MediaScannerService extends Service implements Runnable
             } catch (Exception e) {
                 Log.e(TAG, "Exception in handleMessage", e);
             }
+
             mScanFinished = true;
             stopSelf(msg.arg1);
         }

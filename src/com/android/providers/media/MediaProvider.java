@@ -100,7 +100,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.PriorityQueue;
+<<<<<<< HEAD
 import java.util.regex.Pattern;
+=======
+>>>>>>> remotes/aosp/jb-mr0-release
 import java.util.Stack;
 
 import libcore.io.ErrnoException;
@@ -323,9 +326,12 @@ public class MediaProvider extends ContentProvider {
      * on demand, create and upgrade the schema, etc.
      */
     static final class DatabaseHelper extends SQLiteOpenHelper {
+<<<<<<< HEAD
         // Matches SQLite database temporary files.
         private static final Pattern DB_TMPFILE_PAT = Pattern.compile("\\.db-\\w+\\z");
 
+=======
+>>>>>>> remotes/aosp/jb-mr0-release
         final Context mContext;
         final String mName;
         final boolean mInternal;  // True if this is the internal database
@@ -424,13 +430,17 @@ public class MediaProvider extends ContentProvider {
 
             // delete least recently used databases if we are over the limit
             String[] databases = mContext.databaseList();
+<<<<<<< HEAD
             String[] dbFiles   = databases.clone();
+=======
+>>>>>>> remotes/aosp/jb-mr0-release
             int count = databases.length;
             int limit = MAX_EXTERNAL_DATABASES;
 
             // delete external databases that have not been used in the past two months
             long twoMonthsAgo = now - OBSOLETE_DATABASE_DB;
             for (int i = 0; i < databases.length; i++) {
+<<<<<<< HEAD
                 // Remove SQLite temporary files as they don't count as distinct databases.
                 if (DB_TMPFILE_PAT.matcher(databases[i]).find()) {
                     databases[i] = null;
@@ -438,6 +448,8 @@ public class MediaProvider extends ContentProvider {
                     continue;
                 }
 
+=======
+>>>>>>> remotes/aosp/jb-mr0-release
                 File other = mContext.getDatabasePath(databases[i]);
                 if (INTERNAL_DATABASE_NAME.equals(databases[i]) || file.equals(other)) {
                     databases[i] = null;
@@ -451,6 +463,7 @@ public class MediaProvider extends ContentProvider {
                     long time = other.lastModified();
                     if (time < twoMonthsAgo) {
                         if (LOCAL_LOGV) Log.v(TAG, "Deleting old database " + databases[i]);
+<<<<<<< HEAD
 
                         // Delete database and all temporary files associated with it.
                         String name = databases[i];
@@ -460,6 +473,9 @@ public class MediaProvider extends ContentProvider {
                             }
                         }
 
+=======
+                        mContext.deleteDatabase(databases[i]);
+>>>>>>> remotes/aosp/jb-mr0-release
                         databases[i] = null;
                         count--;
                     }
@@ -485,6 +501,7 @@ public class MediaProvider extends ContentProvider {
                 // delete least recently used database
                 if (lruIndex != -1) {
                     if (LOCAL_LOGV) Log.v(TAG, "Deleting old database " + databases[lruIndex]);
+<<<<<<< HEAD
 
                     // Delete database and all temporary files associated with it.
                     String name = databases[lruIndex];
@@ -494,6 +511,9 @@ public class MediaProvider extends ContentProvider {
                         }
                     }
 
+=======
+                    mContext.deleteDatabase(databases[lruIndex]);
+>>>>>>> remotes/aosp/jb-mr0-release
                     databases[lruIndex] = null;
                     count--;
                 }
